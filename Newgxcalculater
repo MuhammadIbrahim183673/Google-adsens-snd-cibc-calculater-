@@ -1,0 +1,71 @@
+{
+  "name": "gxcalculator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "13.4.10",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  }
+}import { useState } from 'react';
+
+export default function Home() {
+  const [pageViews, setPageViews] = useState(1000);
+  const [cpc, setCPC] = useState(0.2);
+  const [ctr, setCTR] = useState(2);
+  const [xibcRate, setXibcRate] = useState(1.5);
+
+  const earnings = ((pageViews * (ctr / 100)) * cpc).toFixed(2);
+  const xibcEarnings = (earnings * xibcRate).toFixed(2);
+
+  return (
+    <div style={{ padding: "2rem", maxWidth: "600px", margin: "auto", fontFamily: "Arial" }}>
+      <h1 style={{ fontSize: "24px", marginBottom: "1rem" }}>AdSense + XIBC Earnings Calculator</h1>
+
+      <label>Page Views:
+        <input type="number" value={pageViews} onChange={(e) => setPageViews(+e.target.value)} />
+      </label><br />
+
+      <label>CTR (%):
+        <input type="number" value={ctr} step="0.1" onChange={(e) => setCTR(+e.target.value)} />
+      </label><br />
+
+      <label>CPC ($):
+        <input type="number" value={cpc} step="0.01" onChange={(e) => setCPC(+e.target.value)} />
+      </label><br />
+
+      <label>XIBC Rate:
+        <input type="number" value={xibcRate} step="0.1" onChange={(e) => setXibcRate(+e.target.value)} />
+      </label><br /><br />
+
+      <div><strong>AdSense Earnings:</strong> ${earnings}</div>
+      <div><strong>XIBC Earnings:</strong> ${xibcEarnings}</div>
+    </div>
+  );
+}body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #f9f9f9;
+  color: #333;
+}
+input {
+  margin: 5px;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+label {
+  display: block;
+  margin-top: 10px;
+}/** @type {import('next').NextConfig} */
+const nextConfig = {}
+
+module.exports = nextConfig# Google AdSense + XIBC Calculator
+
+Simple calculator to estimate AdSense revenue and multiply it using XIBC ROI rate. Built with Next.js.
